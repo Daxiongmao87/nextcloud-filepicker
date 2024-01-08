@@ -3,7 +3,7 @@
   "description": "A module with the goal of allowing users to interface with their nextcloud remote storage through FilePicker.",
   "version": "0.0.1",
   "url": "https://github.com/Daxiongmao87/nextcloud-foundry",
-  "manifest": "https://github.com/Daxiongmao87/nextcloud-foundry/releases/download/0.0.1/module.json",
+  "manifest": "https://raw.githubusercontent.com/Daxiongmao87/nextcloud-foundry/main/module.json",
   "download": "https://github.com/Daxiongmao87/nextcloud-foundry/archive/refs/tags/0.0.1.zip",
   "scripts": "main.js",
   "id": "nextcloud-foundry",
