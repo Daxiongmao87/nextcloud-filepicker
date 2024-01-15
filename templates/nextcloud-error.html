@@ -1,0 +1,50 @@
+<style>
+.fake-button {
+    width: 100%;
+    background: rgba(255, 255, 240, 0.8);
+    border-radius: 3px;
+    font-size: var(--font-size-14);
+    line-height: 28px;
+    font-family: var(--font-primary);
+    cursor: pointer;
+    border: 1px solid var(--color-border-light-primary);
+    text-align: center;
+}
+.fake-button:hover {
+    outline: none;
+    box-shadow: 0 0 5px var(--color-shadow-primary);
+}
+</style>
+
+
+<div class="nextcloud-error-container" style="margin:24px;">
+    <h2>Nextcloud Connection Error</h2>
+    {{#if isUrlNotSet}}
+        <p>The Nextcloud URL is not set in the module settings.</p>
+        <div class="fake-button" onclick='new SettingsConfig(object = {}, options = {
+
+        }).render(true)._tabs[0].active = "nextcloud-foundry";'>
+            <i class="fas fa-cogs"></i> Configure Settings
+        </div>
+    {{/if}}
+    {{#if isCredentialsNotSet}}
+        <p>Username or password is not set in the module settings.</p>
+        <div class="fake-button" onclick='new SettingsConfig(object = {}, options = {
+
+        }).render(true)._tabs[0].active = "nextcloud-foundry";'>
+            <i class="fas fa-cogs"></i> Configure Settings
+        </div>
+    {{/if}}
+    {{#if isCorsError}}
+        <p>
+            Error communicating with your Nextcloud server: possible CORS error detected.
+            Due to the current limitations of Nextcloud for handling CORS API calls,
+            further Nextcloud configuration is needed for Nextcloud-Foundry's functionality.
+            Please visit <a href="https://github.com/Daxiongmao87/nextcloud-foundry#cors-issues" target="_blank">here</a>
+            for more information.
+        </p>
+    {{/if}}
+    {{#if isOtherError}}
+        <p>An unknown error occurred while trying to connect to Nextcloud.</p>
+    {{/if}}
+</div>
