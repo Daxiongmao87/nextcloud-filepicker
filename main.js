@@ -456,6 +456,7 @@ class NextcloudFilePicker extends FilePicker {
                         const target = await this.createPublicLink(path);
                         ui.notifications.info("A public link has been created for the file.");
                         path = target;
+                        handleFileSelection(ev.target.file.value, path);
                     } catch (error) {
                         console.error('Error creating public link:', error);
                         ui.notifications.error("Failed to create a public link for the file.");
@@ -467,6 +468,7 @@ class NextcloudFilePicker extends FilePicker {
             }
             else {
                 path = publicLink;
+                handleFileSelection(ev.target.file.value, path);
             }
         }
         if (this.field) {
@@ -498,7 +500,7 @@ class NextcloudFilePicker extends FilePicker {
                         label: "Yes",
                         callback: (html) => {
                             const skipConfirmation = html.find('#skipConfirmation').is(':checked');
-                            game.settings.set('nextcloud-filepicker', 'skipPublicLinkConfirmation', skipConfirmation);
+                            setSetting('skipPublicLinkConfirmation', skipConfirmation);
                             resolve(true);
                         }
                     },
@@ -648,7 +650,7 @@ class NextcloudFilePicker extends FilePicker {
      * @returns {Promise<Object>} A promise that resolves to the data needed for rendering the file picker UI.
      */
     async getData(options = {}) {
-        const data = await super.getData(options);
+        let data = await super.getData(options);
         if (this.activeSource === "nextcloud") {
             const result = this.result;
             const source = this.source;
@@ -685,7 +687,7 @@ class NextcloudFilePicker extends FilePicker {
                     }
                 });    
             }
-            return {
+            data =  {
                 bucket: isS3 ? source.bucket : null,
                 canGoBack: this.activeSource !== "",
                 canUpload: this.canUpload,
@@ -708,12 +710,13 @@ class NextcloudFilePicker extends FilePicker {
             };
         } 
         if (data.selected && this.isNextcloudUrl(data.selected)) {
+            
             let nextcloudFilePaths = getSetting("nextcloudFilePaths");
             const relativePath = nextcloudFilePaths[data.selected];
             if (relativePath) {
-                data.selected = storedPath;
+                data.selected = relativePath;
             } else {
-                data.selected = relativePath || this.extractFileName(data.selected)
+                data.selected = this.extractFileName(data.selected)
             }
         }
         return data;
@@ -732,7 +735,7 @@ class NextcloudFilePicker extends FilePicker {
      * @returns {string} The extracted filename.
      */
     extractFileName(path) {
-        return path.split('/').pop().split('?')[0];
+        return decodeURIComponent(path.split('/').pop().split('?')[0]);
     }
     /**
      * Updates the image source in the DOM for a given file name with the provided Base64 image data.
@@ -854,8 +857,12 @@ class NextcloudFilePicker extends FilePicker {
  * @returns {*} The value of the requested setting.
  */
 function getSetting(setting) {
-        return game.settings.get('nextcloud-filepicker', setting);
-    }
+    return game.settings.get('nextcloud-filepicker', setting);
+}
+
+function setSetting(setting, value) {
+    return game.settings.set('nextcloud-filepicker', setting, value);
+}
 /**
  * Initializes the module, sets up Nextcloud integration settings, and configures the NextcloudFilePicker.
  */
@@ -872,9 +879,9 @@ function initializeModule() {
  * @param {string} nextcloudUrl - The Nextcloud URL associated with the file.
  */
 function handleFileSelection(filePath, nextcloudUrl) {
-    let nextcloudFilePaths = game.settings.get("your-module-name", "nextcloudFilePaths");
+    let nextcloudFilePaths = getSetting("nextcloudFilePaths");
     nextcloudFilePaths[nextcloudUrl] = filePath;
-    game.settings.set("your-module-name", "nextcloudFilePaths", nextcloudFilePaths);
+    setSetting("nextcloudFilePaths", nextcloudFilePaths);
 }
 /**
  * Logs a message for the module with a specified level of importance.
