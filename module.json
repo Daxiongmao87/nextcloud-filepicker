@@ -1,10 +1,10 @@
 {
   "title": "Nextcloud Foundry",
   "description": "A module with the goal of allowing users to interface with their nextcloud remote storage through FilePicker.",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "url": "https://github.com/Daxiongmao87/nextcloud-foundry",
   "manifest": "https://raw.githubusercontent.com/Daxiongmao87/nextcloud-foundry/main/module.json",
-  "download": "https://github.com/Daxiongmao87/nextcloud-foundry/archive/refs/tags/0.0.1.zip",
+  "download": "https://github.com/Daxiongmao87/nextcloud-foundry/archive/refs/tags/0.1.0.zip",
   "scripts": "main.js",
   "id": "nextcloud-foundry",
   "compatibility": {
