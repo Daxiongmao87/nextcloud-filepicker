@@ -76,7 +76,8 @@ After installation, configure the module settings by entering your Nextcloud ser
 
 [badge_version]: https://img.shields.io/github/v/tag/daxiongmao87/nextcloud-filepicker?label=Version&style=flat-square&color=2577a1
 [badge_issues]: https://img.shields.io/github/issues/daxiongmao87/nextcloud-filepicker?style=flat-square
-[badge_downloads]: https://img.shields.io/github/downloads/daxiongmao87/nextcloud-filepicker/module.zip?label=Downloads&style=flat-square&color=9b43a8
+[badge_downloads]: https://img.shields.io/github/downloads/daxiongmao87/nextcloud-filepicker/total
+
 [badge_fvtt_versions]: https://img.shields.io/endpoint?url=https://foundryshields.com/version?url=https://raw.githubusercontent.com/Daxiongmao87/nextcloud-filepicker/0.1.0/module.json&style=flat-square&color=ff6400
 
 
