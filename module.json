@@ -1,5 +1,5 @@
 {
-  "title": "Nextcloud Foundry",
+  "title": "Nextcloud FilePicker",
   "description": "A module with the goal of allowing users to interface with their nextcloud remote storage through FilePicker.",
   "version": "0.1.0",
   "url": "https://github.com/Daxiongmao87/nextcloud-filepicker",
