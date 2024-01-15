@@ -1,6 +1,7 @@
 # Nextcloud FilePicker Module for Foundry VTT
 ![badge_version] ![badge_issues] ![badge_downloads]
 ![badge_fvtt_versions]
+
 ![Screenshot](https://github.com/Daxiongmao87/nextcloud-filepicker/blob/main/images/nextcloud-filepicker-screenshot.png)
 ## Introduction
 
