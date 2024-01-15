@@ -1,1 +1,1 @@
-# nextcloud-foundry
+# nextcloud-filepicker

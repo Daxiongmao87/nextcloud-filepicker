@@ -3,21 +3,21 @@
  * This includes settings for server URL, user credentials, and other preferences.
  */
 function registerSettings() {
-    game.settings.register('nextcloud-foundry', 'url', {
+    game.settings.register('nextcloud-filepicker', 'url', {
         name: 'Nextcloud Server URL',
         scope: 'world',
         config: true,
         type: String,
         default: ''
     });
-    game.settings.register('nextcloud-foundry', 'userName', {
+    game.settings.register('nextcloud-filepicker', 'userName', {
         name: 'Nextcloud Account User Name',
         scope: 'world',
         config: true,
         type: String,
         default: ''
     });
-    game.settings.register('nextcloud-foundry', 'appPassword', {
+    game.settings.register('nextcloud-filepicker', 'appPassword', {
         name: 'Nextcloud Account App Password',
         scope: 'world',
         hint: 'Do not use your user password.  Creating an app password: Nextcloud Server Website -> Profile Picture -> Personal Settings -> Security -> Devices & Sessions -> "App name" -> Create new password',
@@ -25,7 +25,7 @@ function registerSettings() {
         type: String,
         default: ''
     });
-    game.settings.register('nextcloud-foundry', 'subdirectory', {
+    game.settings.register('nextcloud-filepicker', 'subdirectory', {
         name: 'Nextcloud Subdirectory',
         scope: 'world',
         hint: 'Optional.  Use this field if you wish to only have access to a subdirectory within your Nextcloud storage.',
@@ -33,7 +33,7 @@ function registerSettings() {
         type: String,
         default: ''
     });
-    game.settings.register('nextcloud-foundry', 'skipPublicLinkConfirmation', {
+    game.settings.register('nextcloud-filepicker', 'skipPublicLinkConfirmation', {
         name: 'Skip Public Link Confirmation',
         hint: 'If enabled, the public link creation confirmation dialog will be skipped.',
         scope: 'client',
@@ -41,7 +41,7 @@ function registerSettings() {
         type: Boolean,
         default: false
     });
-    game.settings.register("nextcloud-foundry", "nextcloudFilePaths", {
+    game.settings.register("nextcloud-filepicker", "nextcloudFilePaths", {
         name: "Nextcloud Filepaths",
         hint: "This setting is only for the purpose of preserving filepaths for navigation convenience",
         scope: "world", 
@@ -210,7 +210,7 @@ class NextcloudFilePicker extends FilePicker {
                 break;
         }
         const templateData = { isCorsError, isUrlNotSet, isCredentialsNotSet, isOtherError };
-        const renderedHtml = await renderTemplate('modules/nextcloud-foundry/templates/nextcloud-error.html', templateData);
+        const renderedHtml = await renderTemplate('modules/nextcloud-filepicker/templates/nextcloud-error.html', templateData);
         const content = this.element.find('.filepicker-body');
         this.element.find('nav.tabs[aria-role="Form Tab Navigation"]').nextAll().remove();
         this.element.find('section.filepicker-body').nextAll().remove();
@@ -233,7 +233,7 @@ class NextcloudFilePicker extends FilePicker {
      * Renders the UI specifically for CORS (Cross-Origin Resource Sharing) errors encountered with Nextcloud.
      */
     async _renderCorsErrorUI() {
-        const html = await renderTemplate("modules/nextcloud-foundry/templates/cors-error.html");
+        const html = await renderTemplate("modules/nextcloud-filepicker/templates/cors-error.html");
         const content = this.element.find('.filepicker-body');
         this.element.find('nav.tabs[aria-role="Form Tab Navigation"]').nextAll().remove();
         this.element.find('section.filepicker-body').nextAll().remove();
@@ -481,7 +481,7 @@ class NextcloudFilePicker extends FilePicker {
      * @returns {Promise<boolean>} A promise that resolves to true if the user confirms, false otherwise.
      */
     async showConfirmationDialog() {
-        if (game.settings.get('nextcloud-foundry', 'skipPublicLinkConfirmation')) {
+        if (game.settings.get('nextcloud-filepicker', 'skipPublicLinkConfirmation')) {
             return true;
         }
         return new Promise(resolve => {
@@ -498,7 +498,7 @@ class NextcloudFilePicker extends FilePicker {
                         label: "Yes",
                         callback: (html) => {
                             const skipConfirmation = html.find('#skipConfirmation').is(':checked');
-                            game.settings.set('nextcloud-foundry', 'skipPublicLinkConfirmation', skipConfirmation);
+                            game.settings.set('nextcloud-filepicker', 'skipPublicLinkConfirmation', skipConfirmation);
                             resolve(true);
                         }
                     },
@@ -854,7 +854,7 @@ class NextcloudFilePicker extends FilePicker {
  * @returns {*} The value of the requested setting.
  */
 function getSetting(setting) {
-        return game.settings.get('nextcloud-foundry', setting);
+        return game.settings.get('nextcloud-filepicker', setting);
     }
 /**
  * Initializes the module, sets up Nextcloud integration settings, and configures the NextcloudFilePicker.
@@ -951,7 +951,7 @@ function convertBlobToBase64(blob) {
  * @returns {string} The full WebDAV URL.
  */
 function constructWebDavUrl(relativePath) {
-    const baseUrl = game.settings.get('nextcloud-foundry', 'url');
+    const baseUrl = game.settings.get('nextcloud-filepicker', 'url');
     return `${baseUrl}/${relativePath}`;
 }
 /**
