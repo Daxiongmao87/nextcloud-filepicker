@@ -355,7 +355,7 @@ class NextcloudFilePicker extends FilePicker {
             if ( isFile ) {
                 const urlElement = xmlDoc.querySelector("url");
                 if (urlElement) {
-                    let fileName = encodeURIComponent(file.split('/').pop());
+                    let fileName = encodeURIComponent(filePath.split('/').pop());
                     const url = urlElement.textContent;
                                         return url + `/download/${fileName}`;
                 } else {
