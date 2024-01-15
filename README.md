@@ -1,13 +1,16 @@
 # Nextcloud FilePicker Module for Foundry VTT
+![Screenshot](https://github.com/Daxiongmao87/nextcloud-filepicker/blob/main/images/nextcloud-filepicker-screenshot.png)
 ## Introduction
 
-"Nextcloud FilePicker" is a module for Foundry Virtual Tabletop that integrates with Nextcloud, allowing users to access and manage their Nextcloud files directly within Foundry VTT. This module enhances the virtual tabletop experience by providing seamless access to a wide range of cloud-stored assets.
+**Nextcloud FilePicker** is a module for Foundry Virtual Tabletop that integrates with Nextcloud, allowing users to access and manage their Nextcloud files directly within Foundry VTT. This module enhances the virtual tabletop experience by providing seamless access to a wide range of cloud-stored assets.
+
+***BE AWARE**: This module will create public links for files you use from your Nextcloud instance to your Foundry VTT server, this is so your other players will be able to view your file during the session.*
 
 ## Key Features
 
     - Nextcloud Integration: Configure and connect to your Nextcloud server directly from Foundry VTT.
     - File Management: Browse, upload, and select files from your Nextcloud storage without leaving Foundry VTT.
-    - Easy Configuration: Set up server URLs, user credentials, and other preferences through Foundry VTT's settings..
+    - Subdirectory Filtering: Make Nextcloud FilePicker only view a user-defined subdirectory within your nextcloud data structure.
     - Enhanced File Picker: Custom file picker extension tailored for Nextcloud, improving the user interface and experience.
 
 ## Requirements
@@ -59,12 +62,6 @@ In a standard setup, Nextcloud's CORS policy does not fully support the needs of
 
 The installation of the WebAppPassword app is not just a requirement but a fundamental workaround to the CORS limitations that Nextcloud has with SPAs until Nextcloud has its own solutions implemented. Without it, users may encounter issues when the Foundry VTT tries to access or manipulate files stored in Nextcloud.
 
-## Installation
-
-    - Download the module from the release page.
-    - Install it in Foundry VTT by specifying the module's manifest URL.
-    - Activate the module in your world from the game settings.
-
 ## Usage
 
-After installation, configure the module settings by entering your Nextcloud server details and credentials. You can then access and manage your Nextcloud files directly through Foundry VTT's file browser.
+After installation, configure the module settings by entering your Nextcloud server details and App Password (Personal Settings -> Security -> Devices & Sessions -> Scroll to bottom of section). You can then access and manage your Nextcloud files directly through Foundry VTT's file browser.
