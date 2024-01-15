@@ -13,6 +13,12 @@
     - Subdirectory Filtering: Make Nextcloud FilePicker only view a user-defined subdirectory within your nextcloud data structure.
     - Enhanced File Picker: Custom file picker extension tailored for Nextcloud, improving the user interface and experience.
 
+## TODO (Not Implemented)
+
+    - Bulk Upload Support
+    - Public Link Expiration/Revocation
+    - Copy/Move/Deletion functionality
+
 ## Requirements
 
     1. Nextcloud Instance: Users must have a Nextcloud instance installed and running.
