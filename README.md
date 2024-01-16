@@ -36,13 +36,11 @@
 ```javascript
 location / {
     if ($request_method = 'OPTIONS') {
-        add_header 'Access-Control-Allow-Origin' '*';
-        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+        add_header 'Access-Control-Allow-Origin' '<foundry.domain.name>';
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, PROPFIND, SEARCH, MKCOL, PUT';
         # Add any other required headers for your setup
-        add_header 'Access-Control-Allow-Headers' 'Content-Type, Authorization';
+        add_header 'Access-Control-Allow-Headers' 'Authorization, OCS-APIRequest, Content-Type';
         add_header 'Access-Control-Allow-Credentials' 'true';
-        add_header 'Content-Type' 'text/plain charset=UTF-8';
-        add_header 'Content-Length' 0;
         return 204;
     }
     # Existing Nginx configuration here
@@ -53,10 +51,10 @@ location / {
 
 ```xml
 <IfModule mod_headers.c>
-    Header set Access-Control-Allow-Origin "*"
-    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header set Access-Control-Allow-Origin "<foundry.domain.name>"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS, PROPFIND, SEARCH, MKCOL, PUT"
     # Add any other required headers for your setup
-    Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+    Header set Access-Control-Allow-Headers "Authorization, OCS-APIRequest, Content-Type"
     Header always set Access-Control-Allow-Credentials "true"
 </IfModule>
 ```
