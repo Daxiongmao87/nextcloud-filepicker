@@ -117,7 +117,9 @@ class NextcloudFilePicker extends FilePicker {
      */
     async _fetchNextcloudFiles(path) {
         const endpoint = `remote.php/dav/files/${getSetting('userName')}/${getSetting('subdirectory')}/${path}`;
-        const xmlResponse = await NextcloudFilePicker.makeNextcloudApiRequest(this, endpoint, 'PROPFIND', null, {}, {}, true);
+        this.showSpinner();
+        const xmlResponse = await NextcloudFilePicker.makeNextcloudApiRequest(endpoint, 'PROPFIND', null, {}, {});
+        this.hideSpinner();
         const data = this._parseWebDavResponse(xmlResponse);
         data.path = path;
         return data;
@@ -154,7 +156,9 @@ class NextcloudFilePicker extends FilePicker {
         </d:searchrequest>`;
         const endpoint = `remote.php/dav/`;
         try {
-            const xmlResponse = await NextcloudFilePicker.makeNextcloudApiRequest(this, endpoint, 'SEARCH', searchXml, { 'Content-Type': 'text/xml' });
+            this.showSpinner();
+            const xmlResponse = await NextcloudFilePicker.makeNextcloudApiRequest(endpoint, 'SEARCH', searchXml, { 'Content-Type': 'text/xml' });
+            this.hideSpinner();
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(xmlResponse, "application/xml");
             const fileidElements = xmlDoc.querySelectorAll("oc\\:fileid, fileid");
@@ -178,7 +182,7 @@ class NextcloudFilePicker extends FilePicker {
         try {
             const fileId = await this.fetchFileId(fileName);
             const previewEndpoint = `index.php/apps/webapppassword/core/preview?fileId=${fileId}&x=${s}&y=${s}`;
-            const imageBlob = await NextcloudFilePicker.makeNextcloudApiRequest(this, previewEndpoint, 'GET', null, {}, { responseType: 'blob' });
+            const imageBlob = await NextcloudFilePicker.makeNextcloudApiRequest(previewEndpoint, 'GET', null, {}, { responseType: 'blob' });
             return convertBlobToBase64(imageBlob);
         } catch (error) {
             console.error('Error fetching image as Base64:', error);
@@ -258,8 +262,7 @@ class NextcloudFilePicker extends FilePicker {
      * @param {boolean} [shouldWait=false] - Whether to show a loading spinner during the request.
      * @returns {Promise} A promise that resolves to the response from the API request.
      */
-    static async makeNextcloudApiRequest(nextcloudFilePicker, endpoint, method = 'GET', data = null, headers = {}, options = {}, shouldWait = false) {
-        if (shouldWait) nextcloudFilePicker.showSpinner(nextcloudFilePicker);
+    static async makeNextcloudApiRequest(endpoint, method = 'GET', data = null, headers = {}, options = {}) {
         const baseUrl = getSetting('url');
         const userName = getSetting('userName');
         const appPassword = getSetting('appPassword');
@@ -305,16 +308,14 @@ class NextcloudFilePicker extends FilePicker {
         } catch (error) {
             console.error('Error making API request:', error);
             throw error;
-        } finally {
-            if (shouldWait) nextcloudFilePicker.hideSpinner(nextcloudFilePicker);
-        }
+        } 
     }
     /**
      * Displays a loading spinner in the file picker UI during processing or API requests.
      * @param {NextcloudFilePicker} nextcloudFilePicker - The instance of the NextcloudFilePicker.
      */
-    showSpinner(nextcloudFilePicker) {
-        const html = nextcloudFilePicker.element;
+    showSpinner() {
+        const html = this.element;
         const filePickerElement = html.find(".standard-form");
         filePickerElement.css("filter", "blur(1px) brightness(0.75) contrast(0.75)");
         const spinnerHtml = `<div class='spinner-overlay' style="width: 100%;height: 100%;position: absolute;z-index: 10;text-align: center;line-height: 100%;vertical-align: middle;display: flex;align-items: center;">
@@ -326,8 +327,8 @@ class NextcloudFilePicker extends FilePicker {
      * Hides the loading spinner in the file picker UI after processing or API requests are complete.
      * @param {NextcloudFilePicker} nextcloudFilePicker - The instance of the NextcloudFilePicker.
      */
-    hideSpinner(nextcloudFilePicker) {
-        const html = nextcloudFilePicker.element;
+    hideSpinner() {
+        const html = this.element;
         const filePickerElement = html.find(".standard-form");
         filePickerElement.css("filter", "");
         filePickerElement.parent().find('.spinner-overlay').remove();
@@ -349,7 +350,7 @@ class NextcloudFilePicker extends FilePicker {
         }
         const endpoint = `/index.php/apps/webapppassword/api/v1/shares?path=${filePath}&reshares=true&subfiles=false`;
         try {
-            const response = await NextcloudFilePicker.makeNextcloudApiRequest(this, endpoint, 'GET');
+            const response = await NextcloudFilePicker.makeNextcloudApiRequest(endpoint, 'GET');
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(response, "application/xml");
             if ( isFile ) {
@@ -395,7 +396,9 @@ class NextcloudFilePicker extends FilePicker {
             shareType: 3,
             permissions: 1
         };
-        const response = await NextcloudFilePicker.makeNextcloudApiRequest(this, endpoint, 'POST', body, {}, {}, true);
+        this.showSpinner();
+        const response = await NextcloudFilePicker.makeNextcloudApiRequest(endpoint, 'POST', body, {}, {});
+        this.hideSpinner();
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(response, "application/xml");
         const urlElement = xmlDoc.querySelector("url");
@@ -533,7 +536,7 @@ class NextcloudFilePicker extends FilePicker {
                 reader.onload = async () => {
                     try {
                         const arrayBuffer = reader.result;
-                        await NextcloudFilePicker.makeNextcloudApiRequest(this, endpoint, 'PUT', arrayBuffer, {}, {}, true);
+                        await NextcloudFilePicker.makeNextcloudApiRequest(endpoint, 'PUT', arrayBuffer, {}, {});
                         resolve({ path: endpoint });
                     } catch (error) {
                         console.error('Error uploading to Nextcloud:', error);
@@ -590,7 +593,7 @@ class NextcloudFilePicker extends FilePicker {
             let fullPath = target;
             const endpoint = `remote.php/dav/files/${getSetting('userName')}/${getSetting('subdirectory')}/${fullPath}`;
             try {
-                await NextcloudFilePicker.makeNextcloudApiRequest(options.nextcloudFilePicker, endpoint, 'MKCOL', null, {}, {}, true);
+                await NextcloudFilePicker.makeNextcloudApiRequest(endpoint, 'MKCOL', null, {}, {});
                 ui.notifications.info(`Directory created: ${fullPath}`);
                 return true;
             } catch (error) {
