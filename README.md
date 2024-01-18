@@ -67,7 +67,7 @@ To effectively use the Nextcloud FilePicker module in Foundry VTT, understanding
 
 In a standard setup, Nextcloud's CORS policy does not fully support the needs of SPAs like Foundry VTT, particularly for certain WebDAV operations. This is where the WebAppPassword app becomes essential. It provides a workaround by injecting the needed CORS headers for certain API calls. This allows Foundry VTT to interact with the Nextcloud server without being hindered by CORS restrictions.
 
-The installation of the WebAppPassword app is not just a requirement but a fundamental workaround to the CORS limitations that Nextcloud has with SPAs until Nextcloud has its own solutions implemented. Without it, users may encounter issues when the Foundry VTT tries to access or manipulate files stored in Nextcloud.
+The installation of the WebAppPassword app is not just a requirement but a fundamental workaround to the CORS limitations that Nextcloud has with SPAs until Nextcloud has its own solutions implemented. Without it, users may encounter issues when the Foundry VTT tries to access or manipulate files stored in Nextcloud.  More info on WebAppPassword [here](https://apps.nextcloud.com/apps/webapppassword)
 
 ## Usage
 
