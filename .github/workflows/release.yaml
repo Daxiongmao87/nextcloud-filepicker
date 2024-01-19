@@ -17,20 +17,24 @@ jobs:
         
     - name: Install jq and moreutils
       run: sudo apt-get update && sudo apt-get install -y jq moreutils
-
+      
     - name: Update module.json
       run: |
         TAG_NAME=${GITHUB_REF#refs/tags/}
         jq ".manifest = \"https://github.com/Daxiongmao87/nextcloud-filepicker/releases/download/$TAG_NAME/module.json\"" module.json | sponge module.json
         jq ".download = \"https://github.com/Daxiongmao87/nextcloud-filepicker/releases/download/$TAG_NAME/module.zip\"" module.json | sponge module.json
-
-    - name: Commit and Push Changes
+          
+    - name: Recreate Tag and Commit Changes
       run: |
+        TAG_NAME=${GITHUB_REF#refs/tags/}
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add module.json
         git commit -m "Update manifest and download links in module.json"
-        git push
+        git tag -d $TAG_NAME
+        git push origin :refs/tags/$TAG_NAME
+        git tag $TAG_NAME
+        git push origin $TAG_NAME
 
     - name: Zip Repository Contents
       run: zip -r -X module.zip . -x "*.github/*" -x "*.git/*"
