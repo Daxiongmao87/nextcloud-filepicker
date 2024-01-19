@@ -35,6 +35,12 @@ jobs:
           git add module.json
           git commit -m "Update manifest and download links in module.json"
           git push
+          
+      - name: Define Version and Tag
+        run: |
+          echo "VERSION=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+          echo "TAG_NAME=${GITHUB_REF#refs/heads/}" | sed 's/-release$//' >> $GITHUB_ENV
+        id: version_tag
 
       - name: Create Tag and Release
         id: create_release
@@ -42,8 +48,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.get_version.outputs.VERSION }}
-          release_name: Release ${{ steps.get_version.outputs.VERSION }}
+          tag_name: ${{ env.TAG_NAME }}
+          release_name: Release ${{ env.VERSION }}
           draft: false
           prerelease: false
 
