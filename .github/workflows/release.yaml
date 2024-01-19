@@ -3,26 +3,33 @@ name: Release Workflow
 on:
   release:
     types: [created]
-    
+
 permissions:
   contents: write
-  
+
 jobs:
   build-and-upload:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-
-    - name: Install jq and moreutils
-      run: sudo apt-get update && sudo apt-get install -y jq moreutils
+      with:
+        ref: ${{ github.ref }}
 
     - name: Update module.json
       run: |
         jq '.manifest = "https://github.com/Daxiongmao87/nextcloud-filepicker/releases/download/${{ github.ref }}/module.json"' module.json | sponge module.json
         jq '.download = "https://github.com/Daxiongmao87/nextcloud-filepicker/releases/download/${{ github.ref }}/module.zip"' module.json | sponge module.json
 
+    - name: Commit and Push Changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add module.json
+        git commit -m "Update manifest and download links in module.json"
+        git push
+
     - name: Zip Repository Contents
-      run: zip -r module.zip . -x "*.github/*" -x "*.git/*"
+      run: zip -r -X module.zip . -x "*.github/*" -x "*.git/*"
 
     - name: Upload module.zip
       uses: actions/upload-release-asset@v1
