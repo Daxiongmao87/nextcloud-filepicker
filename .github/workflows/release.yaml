@@ -10,8 +10,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Install jq
-      run: sudo apt-get install jq
+    - name: Install jq and moreutils
+      run: sudo apt-get update && sudo apt-get install -y jq moreutils
 
     - name: Update module.json
       run: |
