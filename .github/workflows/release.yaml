@@ -5,6 +5,9 @@ on:
     branches:
       - '*-release'
 
+permissions:
+  contents: write
+
 jobs:
   prepare-and-release:
     runs-on: ubuntu-latest
