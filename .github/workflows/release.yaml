@@ -19,7 +19,7 @@ jobs:
         jq '.download = "https://github.com/Daxiongmao87/nextcloud-filepicker/releases/download/${{ github.ref }}/module.zip"' module.json | sponge module.json
 
     - name: Zip Repository Contents
-      run: zip -r -y --no-extra module.zip . -x "*.github*"
+      run: zip -r module.zip . -x "*.github/*" -x "*.git/*"
 
     - name: Upload module.zip
       uses: actions/upload-release-asset@v1
