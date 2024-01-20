@@ -2,7 +2,7 @@
 ![badge_version] ![badge_issues] ![badge_downloads]
 ![badge_fvtt_versions]
 
-☕ [Buy me a coffee!](buymeacoffee.com/?via=daxiongmao87)
+<sub>☕ [Buy me a coffee!](buymeacoffee.com/?via=daxiongmao87)</sub>
 
 ![Screenshot](https://github.com/Daxiongmao87/nextcloud-filepicker/blob/main/images/nextcloud-filepicker-screenshot.png)
 ## Introduction
