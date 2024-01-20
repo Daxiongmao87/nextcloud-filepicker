@@ -1,6 +1,7 @@
 # Nextcloud FilePicker Module for Foundry VTT
 ![badge_version] ![badge_issues] ![badge_downloads]
 ![badge_fvtt_versions]
+![badge_coffee]
 
 ![Screenshot](https://github.com/Daxiongmao87/nextcloud-filepicker/blob/main/images/nextcloud-filepicker-screenshot.png)
 ## Introduction
@@ -78,5 +79,9 @@ After installation, configure the module settings by entering your Nextcloud ser
 [badge_downloads]: https://img.shields.io/github/downloads/daxiongmao87/nextcloud-filepicker/total
 
 [badge_fvtt_versions]: https://img.shields.io/endpoint?url=https://foundryshields.com/version?url=https://github.com/Daxiongmao87/nextcloud-filepicker/releases/latest/download/module.json&style=flat-square&color=ff6400
+[badge_coffee]: https://img.shields.io/badge/Buy_me-a_coffee!-purple?link=buymeacoffee.com%2F%3Fvia%3Ddaxiongmao87&link=buymeacoffee.com%2F%3Fvia%3Ddaxiongmao87
+
+
+
 
 
