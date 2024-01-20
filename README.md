@@ -4,6 +4,7 @@
 
 ☕ [Buy me a coffee!](buymeacoffee.com/?via=daxiongmao87)
 
+![Screenshot](https://github.com/Daxiongmao87/nextcloud-filepicker/blob/main/images/nextcloud-filepicker-screenshot.png)
 ## Introduction
 
 **Nextcloud FilePicker** is a module for Foundry Virtual Tabletop that integrates with Nextcloud, allowing users to access and manage their Nextcloud files directly within Foundry VTT. This module enhances the virtual tabletop experience by providing seamless access to a wide range of cloud-stored assets.
