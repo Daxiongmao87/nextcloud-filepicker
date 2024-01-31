@@ -2,7 +2,7 @@
 ![badge_version] ![badge_issues] ![badge_downloads]
 ![badge_fvtt_versions]
 
-<sub>☕ **[Buy me a coffee!](https://www.buymeacoffee.com/daxiongmao87)**</sub>
+[<img src="https://img.shields.io/badge/Support%20My%20Work-Buy%20me%20a%20coffee%20%E2%98%95-chocolate?style=plastic">](https://www.buymeacoffee.com/daxiongmao87)
 
 ![Screenshot](https://github.com/Daxiongmao87/nextcloud-filepicker/blob/main/images/nextcloud-filepicker-screenshot.png)
 ## Introduction
@@ -75,11 +75,11 @@ The installation of the WebAppPassword app is not just a requirement but a funda
 
 After installation, configure the module settings by entering your Nextcloud server details and App Password (Personal Settings -> Security -> Devices & Sessions -> Scroll to bottom of section). You can then access and manage your Nextcloud files directly through Foundry VTT's file browser.
 
-[badge_version]: https://img.shields.io/github/v/tag/daxiongmao87/nextcloud-filepicker?label=Version&style=flat-square&color=2577a1
-[badge_issues]: https://img.shields.io/github/issues/daxiongmao87/nextcloud-filepicker?style=flat-square
-[badge_downloads]: https://img.shields.io/github/downloads/daxiongmao87/nextcloud-filepicker/total
+[badge_version]: https://img.shields.io/github/v/tag/daxiongmao87/nextcloud-filepicker?label=Version&style=plastic&color=2577a1
+[badge_issues]: https://img.shields.io/github/issues/daxiongmao87/nextcloud-filepicker?label=Issues&style=plastic
+[badge_downloads]: https://img.shields.io/github/downloads/daxiongmao87/nextcloud-filepicker/total?label=Downloads&style=plastic
 
-[badge_fvtt_versions]: https://img.shields.io/endpoint?url=https://foundryshields.com/version?url=https://github.com/Daxiongmao87/nextcloud-filepicker/releases/latest/download/module.json&style=flat-square&color=ff6400
+[badge_fvtt_versions]: https://img.shields.io/endpoint?url=https://foundryshields.com/version?url=https://github.com/Daxiongmao87/nextcloud-filepicker/releases/latest/download/module.json&style=plastic&color=ff6400
 
 
 
